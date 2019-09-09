@@ -35,16 +35,21 @@ function check_submodules_version()
 		color_submodules_associated_commit_id=$color_prefix_red$submodules_associated_commit_id$color_suffix
 		color_submodules_head_commit_id=$color_prefix_red$submodules_head_commit_id$color_suffix
 
+		color_tips=$color_prefix_red"[★]"$color_suffix
 		color_right=$color_prefix_red"[✓]"$color_suffix
 		color_wrong=$color_prefix_red"[✗]"$color_suffix
 
-
-		if [ $submodules_associated_commit_id = $submodules_head_commit_id ]
-		then 
-			echo "$color_right $submodule_name: associatedCommitId($color_submodules_associated_commit_id) == headCommitId($color_submodules_head_commit_id)"
-		else 
-			echo "$color_wrong $submodule_name: associatedCommitId($color_submodules_associated_commit_id) != headCommitId($color_submodules_head_commit_id)"
-			echo true > temp_has_bad_submodule
+		if [ -z "$submodules_associated_commit_id"]
+		then
+			echo "$color_tips $submodule_name: a new submodule, and is waiting to be committed"
+		else
+			if [ $submodules_associated_commit_id = $submodules_head_commit_id ]
+			then 
+				echo "$color_right $submodule_name: associatedCommitId($color_submodules_associated_commit_id) == headCommitId($color_submodules_head_commit_id)"
+			else 
+				echo "$color_wrong $submodule_name: associatedCommitId($color_submodules_associated_commit_id) != headCommitId($color_submodules_head_commit_id)"
+				echo true > temp_has_bad_submodule
+			fi
 		fi
 
 	done
