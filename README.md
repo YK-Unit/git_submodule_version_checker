@@ -78,10 +78,13 @@ git_submodule_version_checker
    preBuild.dependsOn check_git_submodule_version
    ```
 
-   
 
-## 测试样例
+## Examples
 
-- [iOS Example]()
-- [Android Example]()
+以下是接入了`git_submodule_version_checker`工具的示例：
+
+- [iOS Example](https://github.com/YK-Unit/git_submodule_version_checker_example_iOS)
+- [Android Example](https://github.com/YK-Unit/git_submodule_version_checker_example_Android)
+
+PS：你可以使用这些示例对工具进行测试。
 
