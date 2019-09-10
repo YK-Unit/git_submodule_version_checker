@@ -7,17 +7,21 @@ git_submodule_version_checker
 
 按照下述教程，接入`git_submodule_version_checker`到主工程后，每次进行编译前，都会自动对子模块的版本进行检查，若主工程依赖的子模块的版本和子模块仓库实际指向的版本不一致，则编译会以失败结束。
 
+
+
 ## iOS主工程接入`git_submodule_version_checker`
 
 接入步骤如下：
 
-1. 下载`git_submodule_version_checker.sh`，放置到主工程根目录。如图，假设放置在主工程的`script/`文件夹下：
+1. 下载[git_submodule_version_checker](https://github.com/YK-Unit/git_submodule_version_checker/archive/master.zip)，放置到主工程根目录，如图：
 
-   ![image-20190909210246809](Asserts/add_sh_file_to_ios.png)
+   ![image-20190910102152683](Asserts/add_sh_file_to_ios.png)
+
+   
 
 2. 用Xcode打开主工程的，选择`主工程Target > Build Phase > + `，如图所示新建一个名为`[CP] Check Git Submodule Version`的`Run Script Phase`：
 
-   ![image-20190908212537619](Asserts/add_run_script_phase.png)
+   ![image-20190910102445688](/Users/York/Workspace/GitHub/git_submodule_version_checker/Asserts/add_run_script_phase.png)
 
    
 
@@ -25,11 +29,11 @@ git_submodule_version_checker
 
       ``` shell
       root_dir=$SRCROOT
-      sh $root_dir/script/git_submodule_version_checker.sh $root_dir
+      sh $root_dir/git_submodule_version_checker/git_submodule_version_checker.sh $root_dir
       if [ $? != 0 ]
       then 
-          echo "error: This main repo has bad submodules, please run 'git submodule update --init --recursive' to fix it" >&2
-          exit 1
+      echo "error: This main repo has bad submodules, please run 'git submodule update --init --recursive' to fix it" >&2
+      exit 1
       fi
       echo "SUCCESS"
       
@@ -43,13 +47,15 @@ git_submodule_version_checker
 
 接入步骤如下：
 
-1. 下载`git_submodule_version_checker.sh`，放置到主工程根目录。如图，假设放置在主工程的`script/`文件夹下：
+1. 下载[git_submodule_version_checker](https://github.com/YK-Unit/git_submodule_version_checker/archive/master.zip)，放置到主工程根目录，如图：
 
-   ![image-20190909210121390](Asserts/add_sh_file_to_android.png)
+   ![image-20190910101544947](Asserts/add_sh_file_to_android.png)
+
+   
 
 2. 用Android Studio 打开主工程，选择`主工程 > app > build.gradle `，如图所示添加名为`check_git_submodule_version`的`task`，并为`preBuild`这个task设置依赖：
 
-   ![image-20190909210827232](Asserts/add_task.png)
+   ![image-20190910101749081](/Users/York/Workspace/GitHub/git_submodule_version_checker/Asserts/add_task.png)
 
    ​	
 
@@ -59,7 +65,7 @@ git_submodule_version_checker
    task check_git_submodule_version(type: Exec) {
        def root_dir = getRootDir()
        executable "sh"
-       args "$root_dir/script/git_submodule_version_checker.sh", "$root_dir"
+       args "$root_dir/git_submodule_version_checker/git_submodule_version_checker.sh", "$root_dir"
    
        ignoreExitValue true
    
