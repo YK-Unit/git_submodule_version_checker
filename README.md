@@ -21,7 +21,7 @@ git_submodule_version_checker
 
 2. 用Xcode打开主工程的，选择`主工程Target > Build Phase > + `，如图所示新建一个名为`[CP] Check Git Submodule Version`的`Run Script Phase`：
 
-   ![image-20190910102445688](/Users/York/Workspace/GitHub/git_submodule_version_checker/Asserts/add_run_script_phase.png)
+   ![image-20190910102445688](Asserts/add_run_script_phase.png)
 
    
 
@@ -55,7 +55,7 @@ git_submodule_version_checker
 
 2. 用Android Studio 打开主工程，选择`主工程 > app > build.gradle `，如图所示添加名为`check_git_submodule_version`的`task`，并为`preBuild`这个task设置依赖：
 
-   ![image-20190910101749081](/Users/York/Workspace/GitHub/git_submodule_version_checker/Asserts/add_task.png)
+   ![image-20190910101749081](Asserts/add_task.png)
 
    ​	
 
