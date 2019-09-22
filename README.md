@@ -5,11 +5,11 @@ git_submodule_version_checker
 
 `git_submodule_version_checker.sh` 是一个git的子项目版本检测工具，用于帮助主项目在本地检测其当前所依赖的子项目的版本和子项目的本地仓库实际指向的版本是否一致。
 
-检测一个子项目版本是否一致的步骤如下：
+检测判断一个子项目的版本是否一致的步骤如下：
 
-1. 获取当前子项目的本地仓库当前指向的commitId
-2. 获取主项目记录的当前子项目的版本commitId
-3. 将2个commitId进行比较，若二者一致，则说明当前子项目通过版本检测
+1. 获取当前子项目的本地仓库当前指向的commitId：`submodules_head_commit_id`
+2. 获取主项目记录的当前子项目的版本commitId：`submodules_associated_commit_id`
+3. 判断`submodules_associated_commit_id`是否为空，若为空，说明当前子项目为新增子模块，需要提示开发者在主项目中进行提交；若不为空，则将2个commitId进行比较，若二者一致，则说明当前子项目的版本是一致的
 
 移动端开发工程按照下述教程，接入`git_submodule_version_checker`到主项目工程后，每次进行编译前，都会自动对依赖的子项目的版本进行检查，若存在版本不一致的子项目，则编译会以失败结束。
 

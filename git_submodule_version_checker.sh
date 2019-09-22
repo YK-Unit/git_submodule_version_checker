@@ -50,12 +50,12 @@ function check_submodules_version()
 		color_right=$color_prefix_red"[✓]"$color_suffix
 		color_wrong=$color_prefix_red"[✗]"$color_suffix
 
-		# 3-1. 若主项目记录的当前子项目的版本commitId为空，说明当前子项目是第一次添加到主项目中
+		# 3. 判断`submodules_associated_commit_id`是否为空，若为空，说明当前子项目为新增子模块，需要提示开发者在主项目中进行提交；
+		#    若不为空，则将2个commitId进行比较，若二者一致，则说明当前子项目的版本是一致的
 		if [ -z "$submodules_associated_commit_id" ]
 		then
 			echo "$color_tips $submodule_name: a new submodule, and is waiting to be committed"
 		else
-			# 3-2. 将2个commitId进行比较，若二者一致，则说明当前子项目通过版本检测
 			if [ $submodules_associated_commit_id = $submodules_head_commit_id ]
 			then 
 				echo "$color_right $submodule_name: associatedCommitId($color_submodules_associated_commit_id) == headCommitId($color_submodules_head_commit_id)"
