@@ -24,6 +24,7 @@ function check_submodules_version()
 
 	git submodule status | while read -r line
 	do 
+		# 1. 获取当前子项目的本地子模块仓库当前指向的commitId：submodules_head_commit_id
 		eval `echo $line | awk '{
 	    	printf("submodules_head_commit_id=%s; submodule_name=%s", $1, $2)
 		}'`
@@ -36,6 +37,7 @@ function check_submodules_version()
 			submodule_name=${submodule_name:3}
 		fi
 
+		# 2. 获取主项目记录的当前子项目的版本commitId：submodules_associated_commit_id
 		submodule_path="$project_dir/$submodule_name"
 		eval `git ls-tree $cur_branch $submodule_path  | awk '{
 	    	printf("submodules_associated_commit_id=%s", $3)
@@ -48,10 +50,12 @@ function check_submodules_version()
 		color_right=$color_prefix_red"[✓]"$color_suffix
 		color_wrong=$color_prefix_red"[✗]"$color_suffix
 
+		# 3-1. 若主项目记录的当前子项目的版本commitId为空，说明当前子项目是第一次添加到主项目中
 		if [ -z "$submodules_associated_commit_id" ]
 		then
 			echo "$color_tips $submodule_name: a new submodule, and is waiting to be committed"
 		else
+			# 3-2. 将2个commitId进行比较，若二者一致，则说明当前子项目通过版本检测
 			if [ $submodules_associated_commit_id = $submodules_head_commit_id ]
 			then 
 				echo "$color_right $submodule_name: associatedCommitId($color_submodules_associated_commit_id) == headCommitId($color_submodules_head_commit_id)"
