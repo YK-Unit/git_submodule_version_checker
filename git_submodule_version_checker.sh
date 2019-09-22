@@ -24,7 +24,7 @@ function check_submodules_version()
 
 	git submodule status | while read -r line
 	do 
-		# 1. 获取当前子项目的本地子模块仓库当前指向的commitId：submodules_head_commit_id
+		# 1. 获取当前子项目的本地仓库当前指向的commitId：submodules_head_commit_id
 		eval `echo $line | awk '{
 	    	printf("submodules_head_commit_id=%s; submodule_name=%s", $1, $2)
 		}'`
