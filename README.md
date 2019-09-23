@@ -3,7 +3,7 @@ git_submodule_version_checker
 
 ## 关于`git_submodule_version_checker.sh`
 
-`git_submodule_version_checker.sh` 是一个git的子项目版本检测工具，用于帮助主项目在本地检测其当前所依赖的子项目的版本和子项目的本地仓库实际指向的版本是否一致。
+`git_submodule_version_checker.sh` 是一个`git submodule`的版本检测工具，主要用于帮助主项目在本地检测“其当前依赖的子项目的版本”和“子项目的本地仓库实际指向的版本”是否一致。
 
 检测判断一个子项目的版本是否一致的步骤如下：
 
